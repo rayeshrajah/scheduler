@@ -9,7 +9,7 @@ export default function useVisualMode(initial) {
       setMode(mode);
     } else {
       setMode(mode);
-      setHistory([...history, mode]);
+      setHistory(prev => ([...prev, mode]));
     }
   };
 
@@ -18,7 +18,7 @@ export default function useVisualMode(initial) {
       setMode(initial);
     } else {
       setMode(history[history.length - 2]);
-      setHistory([...history.slice(0, history.length - 1)]);
+      setHistory(prev => ([...prev.slice(0, history.length - 1)]));
     }
   };
 
