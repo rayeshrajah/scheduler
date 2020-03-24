@@ -42,7 +42,7 @@ import useVisualMode from "hooks/useVisualMode";
            .catch(error => {transition(ERROR_DELETE, true)})
     }
     
-  return(<article className="appointment">
+  return(<article className="appointment" data-testid="appointment">
           <Header time={props.time}/>
            {mode === EMPTY && (<Empty onAdd={() => { return transition(CREATE)}}/>)}
            {mode === SAVING && <Status message={SAVING}/>}
