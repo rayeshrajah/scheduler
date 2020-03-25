@@ -74,7 +74,6 @@ export default function useApplicationData() {
         freeSpots++;
       }
     }
-    console.log(freeSpots);
     return freeSpots;
   }
 
