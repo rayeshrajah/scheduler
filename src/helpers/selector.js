@@ -1,3 +1,4 @@
+/*filter the appoint by days and gets the appointments for those days */ 
 export function getAppointmentsForDay(state, day) {
   const filterAppointmentsByDay = state.days.filter(
     selectedDay => selectedDay.name === day
@@ -30,7 +31,8 @@ export function getInterview(state, interview){
     interviewObj.interviewer = state.interviewers[interview.interviewer];
     return interviewObj;
 }
-
+//Gets the Interviewers for the Days by using 
+//filter and getting the interviewers id
 export function getInterviewersForDay(state, day){
     const filterInterviewersByDay = state.days.filter(
         selectedDay => selectedDay.name === day

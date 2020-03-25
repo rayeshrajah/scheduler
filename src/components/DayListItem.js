@@ -4,6 +4,8 @@ import "components/DayListItem.scss";
 
 
   export default function DayListItem(props) {
+    //Condition to check how many spots are available,
+    //and will display accordingly
     function formatSpots(){
       let remainingSpotMessage = "";
       if(props.spots === 0){

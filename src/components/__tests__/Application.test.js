@@ -1,24 +1,25 @@
 import React from "react";
 import axios from "axios";
-import { render, 
-         cleanup, 
-         waitForElement, 
-         fireEvent, 
-         prettyDOM, 
-         getByText, 
-         getByAltText, 
-         getByPlaceholderText, 
-         getAllByTestId, 
-         queryByText, 
-         queryByAltText,
-         getByDisplayValue,
-         wait
-        } from "@testing-library/react";
+import {
+  render,
+  cleanup,
+  waitForElement,
+  fireEvent,
+  prettyDOM,
+  getByText,
+  getByAltText,
+  getByPlaceholderText,
+  getAllByTestId,
+  queryByText,
+  queryByAltText,
+  getByDisplayValue,
+  wait
+} from "@testing-library/react";
 import Application from "components/Application";
 
 afterEach(cleanup)
 
-describe("Applicaation", () => {
+describe("Application", () => {
   it("defaults to Monday and changes the schedule when a new day is selected", async () => {
     const { getByText } = render(<Application />);
     await waitForElement(() => getByText("Monday"));
@@ -46,8 +47,8 @@ describe("Applicaation", () => {
   });
 
   it("loads data, cancels an interview and increases the spots remaining for the first day by 1", async () => {
-    const {container} = render(<Application />);
-    await waitForElement (() => getByText(container, "Archie Cohen"));
+    const { container } = render(<Application />);
+    await waitForElement(() => getByText(container, "Archie Cohen"));
     const appointment = getAllByTestId(container, "appointment").find(appointment => queryByText(appointment, "Archie Cohen"));
     fireEvent.click(queryByAltText(appointment, "Delete"));
     expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
@@ -56,17 +57,17 @@ describe("Applicaation", () => {
     await waitForElement(() => getByAltText(appointment, "Add"));
     const day = getAllByTestId(container, "day").find(day => queryByText(day, "Monday"));
     expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
-    
+
   });
 
   it("loads data, edits an interview and keeps the spots remaining for Monday", async () => {
-    const { container } = render (<Application />);
+    const { container } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));
     const appointment = getAllByTestId(container, "appointment").find(appointment => queryByText(appointment, "Archie Cohen"));
     fireEvent.click(queryByAltText(appointment, 'Edit'));
     expect(getByDisplayValue(appointment, "Archie Cohen"));
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
-      target: {value: 'Rayesh'}
+      target: { value: 'Rayesh' }
     });
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
     fireEvent.click(getByText(appointment, "Save"));
@@ -78,13 +79,13 @@ describe("Applicaation", () => {
   it("shows the save error when failing to save an appointment", async () => {
     axios.put.mockRejectedValueOnce();
 
-    const { container } = render (<Application />);
+    const { container } = render(<Application />);
     await waitForElement(() => getByText(container, "Archie Cohen"));
     const appointment = getAllByTestId(container, "appointment").find(appointment => queryByText(appointment, "Archie Cohen"));
     fireEvent.click(queryByAltText(appointment, 'Edit'));
     expect(getByDisplayValue(appointment, "Archie Cohen"));
     fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
-      target: {value: 'Rayesh'}
+      target: { value: 'Rayesh' }
     });
     fireEvent.click(getByAltText(appointment, "Sylvia Palmer"));
     fireEvent.click(getByText(appointment, "Save"));
@@ -96,14 +97,14 @@ describe("Applicaation", () => {
 
   it("shows the delete error when failing to delete an existing appointment", async () => {
     axios.delete.mockRejectedValueOnce();
-    const {container} = render(<Application />);
-    await waitForElement (() => getByText(container, "Archie Cohen"));
+    const { container } = render(<Application />);
+    await waitForElement(() => getByText(container, "Archie Cohen"));
     const appointment = getAllByTestId(container, "appointment").find(appointment => queryByText(appointment, "Archie Cohen"));
     fireEvent.click(queryByAltText(appointment, "Delete"));
     expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
     fireEvent.click(queryByText(appointment, "Confirm"))
     expect(getByText(appointment, "DELETING")).toBeInTheDocument();
-    await waitForElement( () => getByText(appointment, "Error could not delete!"));
+    await waitForElement(() => getByText(appointment, "Error could not delete!"));
     expect(getByText(appointment, "Error could not delete!")).toBeInTheDocument();
   })
 });

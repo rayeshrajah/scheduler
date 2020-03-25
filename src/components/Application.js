@@ -12,12 +12,14 @@ import useApplicationData from "hooks/useApplicationData";
 export default function Application() {
   const { state, setDay, bookInterview, destroyInterview} = useApplicationData();
   const appointments = getAppointmentsForDay(state, state.day);
+  //Mapping over an array of appointments and setting the props of every key value from appointment
   const scheduler = appointments.map(appointment => {
     const interview = getInterview(state, appointment.interview);
     const interviewers = getInterviewersForDay(state, state.day);
     return (
       <Appointment
         key={appointment.id}
+        //spreading the appointment key value pair
         {...appointment}
         interview={interview}
         interviewers={interviewers}

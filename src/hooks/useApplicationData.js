@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+//Custom Hook function which has all
+// the functionality to run the Application.js file
 export default function useApplicationData() {
   const [state, setState] = useState({
     day: "Monday",
@@ -10,7 +11,7 @@ export default function useApplicationData() {
   });
   
   const setDay = day => setState({ ...state, day });
-
+//Axios request to get days, appointments and interviewers and sets the state accordingly
   useEffect(() => {
     const promiseDays = axios.get("http://localhost:8001/api/days");
     const promiseAppointments = axios.get(
@@ -31,7 +32,7 @@ export default function useApplicationData() {
       }
     );
   }, []);
-
+//BookInterview function which will get the information needed and sets and interview
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
@@ -48,7 +49,7 @@ export default function useApplicationData() {
         /*Try to validate the statement above with your database*/
       });
   };
-
+//Deleting an interview function
   const destroyInterview = id => {
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
@@ -76,7 +77,7 @@ export default function useApplicationData() {
     }
     return freeSpots;
   }
-
+//Updates the number of spots directly if the appointment is booked or deleted
   const getSpots = (days, appointments) => {
     const updatedDays = days.map(day => ({
       ...day,
