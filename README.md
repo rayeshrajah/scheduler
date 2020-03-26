@@ -4,15 +4,15 @@ Interview scheduler is a simple web application were an user can type his/her na
 
 ### Final Product
 
-!["Main Page of Interview Scheduler"](./docs/Interview_Scheduler.jpg)
+!["Main Page of Interview Scheduler"](./docs/Interview_Scheduler.png)
 
-!["Booking an Appointment"](./docs/Booking_An_Appointment.jpg)
+!["Booking an Appointment"](./docs/Booking_An_Appointment.png)
 
-!["Booked Appointment"](./docs/Booked_Appointment.jpg)
+!["Booked Appointment"](./docs/Booked_Appointment.png)
 
-!["Deleting An Appointment"](./docs/Deleting_Appointment.jpg)
+!["Deleting An Appointment"](./docs/Deleting_Appointment.png)
 
-!["Appointments For the day"](./docs/Appointments.jpg)
+!["Appointments For the day"](./docs/Appointments.png)
 
 ## Setup
 
